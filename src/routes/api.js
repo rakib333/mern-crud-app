@@ -8,6 +8,8 @@ router.post('/createProduct', ProductController.CreateProduct);
 
 // read product
 router.get('/readProduct', ProductController.ReadProduct);
+// read product by id
+router.get('/readProductByID/:id', ProductController.ReadProductByID);
 
 // update product
 router.post('/updateProduct/:id', ProductController.UpdateProduct);

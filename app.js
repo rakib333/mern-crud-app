@@ -16,7 +16,8 @@ const xss = require('xss-clean');
 
 // mongoose
 const mongoose = require('mongoose');
-
+// managing front end routing
+app.use(express.static('client/build'))
 
 // security middleware implement
 app.use(helmet())
@@ -28,6 +29,7 @@ app.use(xss())
 
 // implement bodyParser
 app.use(bodyParser.json());
+
 
 
 // rate limiter implement
@@ -52,11 +54,9 @@ mongoose.connect(uri, options, (error) => {
 // managing backend api routing
 app.use('/api/v1', router);
 
-// managing front end routing
-app.use(express.static('client/build'))
-app.get('*', (req, res) => {
-	// req.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
-	req.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
-});
+// Add React Front End Routing
+app.get('*',function (req,res) {
+    res.sendFile(path.resolve(__dirname,'client','build','index.html'))
+})
 
 module.exports = app;

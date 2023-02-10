@@ -27,6 +27,20 @@ exports.ReadProduct = (req, res) => {
         }
     })
 };
+// read data by id
+exports.ReadProductByID = (req, res) => {
+    const id = req.params.id;
+    const query = { _id: id };
+    const projection = "productName productPrice quantity unitPrice totalPrice img";
+    productModel.find(query, projection, (err, data) => {
+        if (err) {
+            res.status(400).json({ status: "failed to read ", data: err })
+        }
+        else {
+            res.status(200).json({ status: 'Successfully read data', data: data })
+        }
+    })
+};
 
 
 // update data
